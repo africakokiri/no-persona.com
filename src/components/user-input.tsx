@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@/libs/shadcn/utils";
+
 import { Inter } from "next/font/google";
 import { type FormEvent, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
@@ -15,16 +17,6 @@ export const UserInput = () => {
   const handleSubmit = (e: FormEvent) => {
     // Onsubmit refresh 방지
     e.preventDefault();
-
-    // user input의 길이가 5 미만이면 DB 접근 불가
-    if (userInput.length < 5 && textareaRef.current) {
-      console.log(textareaRef.current);
-    }
-
-    // password의 길이가 6 미만이면 DB 접근 불가
-    if (password.length < 6 && inputRef.current) {
-      console.log(inputRef.current);
-    }
   };
 
   return (
@@ -42,8 +34,12 @@ px-4 md:w-[800px] md:gap-8`}
         maxLength={1000}
         placeholder="Type here."
         spellCheck={false}
-        className="w-full resize-none rounded-none border-[1px]
-border-black p-3 outline-none"
+        className={cn(
+          `h-[50px] w-full resize-none rounded-none border-[1px]
+border-black p-3 outline-none`,
+          userInput.length < 5 && "border-red-500",
+          userInput.length === 0 && "border-black"
+        )}
       />
       <div
         className="flex items-end justify-end gap-4 md:flex-row md:gap-8"
@@ -60,14 +56,17 @@ py-1"
         </div>
         <input
           type="password"
-          minLength={6}
-          maxLength={20}
           ref={inputRef}
           value={password}
+          maxLength={15}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter password here."
-          className="w-full rounded-none border-[1px] border-black px-3
-py-1 outline-none md:block md:w-[200px]"
+          className={cn(
+            `w-full rounded-none border-[1px] border-black px-3 py-1
+outline-none md:block md:w-[200px]`,
+            password.length < 6 && "border-red-500",
+            password.length === 0 && "border-black"
+          )}
         />
         <button className="hidden bg-black px-3 py-1 text-white md:block">
           submit
