@@ -1,10 +1,14 @@
 import { DarkmodeSwitch } from "@/components/darkmode-switch";
+import { UserInput } from "@/components/user-input";
 
 import Image from "next/image";
 
 export default function page() {
   return (
-    <div className="flex h-full w-full items-center justify-center gap-8">
+    <div
+      className="flex h-full w-full flex-col items-center justify-center
+gap-8"
+    >
       <div className="flex flex-col items-center justify-center gap-8">
         <Image
           src="/icons/kokiri.svg"
@@ -18,6 +22,9 @@ export default function page() {
           <p className="text-3xl font-light">kokiri.social</p>
           <p className="font-light">Tell me what you wanna say.</p>
         </div>
+      </div>
+      <div className="flex w-full justify-center">
+        <UserInput />
       </div>
     </div>
   );
