@@ -1,3 +1,5 @@
+import { DarkmodeSwitch } from "@/components/darkmode-switch";
+
 import Image from "next/image";
 
 export default function page() {
@@ -9,12 +11,12 @@ export default function page() {
           alt=""
           width={128}
           height={128}
+          className="dark:invert"
         />
+        <DarkmodeSwitch />
         <div className="flex flex-col items-center justify-center gap-4">
           <p className="text-3xl font-light">kokiri.social</p>
-          <p className="font-light">
-            Just tell me whatever&apos;s on your mind.
-          </p>
+          <p className="font-light">Tell me what you wanna say.</p>
         </div>
       </div>
     </div>

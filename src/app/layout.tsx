@@ -21,7 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.className} h-screen w-screen antialiased`}
+        className={`${robotoMono.className} h-screen w-screen antialiased
+dark:bg-black`}
       >
         <NextThemesProvider>{children}</NextThemesProvider>
       </body>
