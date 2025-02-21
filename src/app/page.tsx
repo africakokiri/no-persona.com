@@ -23,7 +23,7 @@ gap-8"
           <p className="font-light">Tell me what you wanna say.</p>
         </div>
       </div>
-      <div className="flex w-full justify-center">
+      <div className="flex w-full justify-center bg-blue-200">
         <UserInput />
       </div>
     </div>

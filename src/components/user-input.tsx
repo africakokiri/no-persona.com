@@ -9,7 +9,7 @@ export const UserInput = () => {
   return (
     <form
       action=""
-      className={`${inter.className} w-1/2`}
+      className={`${inter.className} w-full px-4 md:w-[800px]`}
     >
       <TextareaAutosize
         maxRows={10}
