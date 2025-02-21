@@ -1,7 +1,7 @@
 "use client";
 
 import { Inter } from "next/font/google";
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -9,9 +9,16 @@ const inter = Inter({ subsets: ["latin"] });
 export const UserInput = () => {
   const [userInput, setUserInput] = useState("");
 
+  const handleSubmit = (e: FormEvent) => {
+    // Onsubmit refresh 방지
+    e.preventDefault();
+  };
+
   return (
     <form
-      action=""
+      onSubmit={(e) =>
+        userInput.length > 0 ? handleSubmit(e) : e.preventDefault()
+      }
       className={`${inter.className} w-full px-4 md:w-[800px]`}
     >
       <TextareaAutosize
