@@ -2,6 +2,9 @@ import NextThemesProvider from "@/libs/next-themes/next-themes-provider";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
+import { Roboto_Mono } from "next/font/google";
+
+const robotoMono = Roboto_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Confession",
@@ -17,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="h-screen w-screen antialiased">
+      <body
+        className={`${robotoMono.className} h-screen w-screen antialiased`}
+      >
         <NextThemesProvider>{children}</NextThemesProvider>
       </body>
     </html>
