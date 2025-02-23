@@ -14,9 +14,15 @@ export const DarkmodeSwitch = ({ className }: { className?: string }) => {
       className={className}
     >
       {theme === "dark" ? (
-        <SunIcon strokeWidth={1.5} />
+        <SunIcon
+          strokeWidth={1.2}
+          size={32}
+        />
       ) : (
-        <MoonIcon strokeWidth={1.5} />
+        <MoonIcon
+          strokeWidth={1.2}
+          size={32}
+        />
       )}
     </button>
   );

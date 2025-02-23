@@ -7,10 +7,10 @@ import { Roboto_Mono } from "next/font/google";
 const robotoMono = Roboto_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Kokiri",
-  description: "Write down everything you wanna say.",
+  title: "No persona",
+  description: "Tell me whatever you want.",
   icons: {
-    icon: "/icons/kokiri.svg"
+    icon: "/icons/square.svg"
   }
 };
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="en">
       <body
         className={`${robotoMono.className} h-screen w-screen antialiased
 dark:bg-[#171717] dark:text-white`}
