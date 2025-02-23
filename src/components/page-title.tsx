@@ -11,6 +11,7 @@ export const PageTitle = () => {
           alt=""
           width={128}
           height={128}
+          className="dark:invert"
         />
       </div>
       <DarkmodeSwitch />
