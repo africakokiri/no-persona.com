@@ -11,14 +11,21 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
+import { cn } from "@/libs/shadcn/utils";
 
 import { useState } from "react";
 
-export const SubmitModal = ({ userInput }: { userInput: string }) => {
+export const SubmitModal = ({
+  userInput,
+  password
+}: {
+  userInput: string;
+  password: string;
+}) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleModal = (e: boolean) => {
-    if (e && userInput.length > 0) {
+    if (e && userInput.length > 4) {
       setOpenModal(true);
     } else {
       setOpenModal(false);
@@ -31,7 +38,15 @@ export const SubmitModal = ({ userInput }: { userInput: string }) => {
       onOpenChange={(e) => handleModal(e)}
     >
       <AlertDialogTrigger
-        className="rounded-md bg-black px-2 py-1 font-light text-white"
+        className={cn(
+          `rounded-md bg-black px-2 py-1 font-light text-white
+transition-colors duration-300`,
+          (userInput.length < 4 || password.length < 4) && "bg-red-500",
+          userInput.length === 0 && password.length === 0 && "bg-black",
+          userInput.length >= 4 &&
+            password.length >= 4 &&
+            "bg-green-500 text-black"
+        )}
       >
         Submit
       </AlertDialogTrigger>
