@@ -1,4 +1,3 @@
-import NextThemesProvider from "@/libs/next-themes/next-themes-provider";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
@@ -25,7 +24,7 @@ export default function RootLayout({
         className={`${robotoMono.className} h-dvh w-dvw bg-white text-black
 antialiased selection:bg-[#171717] selection:text-white`}
       >
-        <NextThemesProvider>{children}</NextThemesProvider>
+        {children}
       </body>
     </html>
   );
