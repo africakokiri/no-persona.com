@@ -1,6 +1,5 @@
 "use client";
 
-import { AlertUuid } from "@/components/alert-uuid";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -41,7 +40,6 @@ export const Modal = ({ userInput }: { userInput: string }) => {
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription asChild>
             <div className="space-y-2">
-              <AlertUuid />
               <p className="leading-7">
                 This action cannot be undone. This will permanently post
                 your comment.

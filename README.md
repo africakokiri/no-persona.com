@@ -1,3 +1,4 @@
 1. user input
-2. ai filtering
-3. fetch supabase
+2. password
+3. ai filtering
+4. fetch supabase
