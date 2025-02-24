@@ -1,6 +1,6 @@
 "use client";
 
-import { SubmitModalBtn } from "@/components/modal";
+import { Modal } from "@/components/modal";
 import { cn } from "@/libs/shadcn/utils";
 
 import { Inter } from "next/font/google";
@@ -42,7 +42,7 @@ md:gap-12"
           <span>{" / "}</span>
           <span>1000</span>
         </p>
-        <SubmitModalBtn userInput={userInput} />
+        <Modal userInput={userInput} />
       </div>
     </form>
   );

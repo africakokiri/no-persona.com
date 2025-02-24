@@ -13,7 +13,7 @@ import {
 
 import { useState } from "react";
 
-export const SubmitModalBtn = ({ userInput }: { userInput: string }) => {
+export const Modal = ({ userInput }: { userInput: string }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleModal = (e: boolean) => {
