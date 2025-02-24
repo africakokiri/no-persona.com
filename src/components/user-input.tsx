@@ -1,5 +1,6 @@
 "use client";
 
+import { SubmitModalBtn } from "@/components/modal";
 import { cn } from "@/libs/shadcn/utils";
 
 import { Inter } from "next/font/google";
@@ -41,9 +42,7 @@ md:gap-12"
           <span>{" / "}</span>
           <span>1000</span>
         </p>
-        <button className="bg-black px-2 py-1 font-medium text-white">
-          Submit
-        </button>
+        <SubmitModalBtn />
       </div>
     </form>
   );
