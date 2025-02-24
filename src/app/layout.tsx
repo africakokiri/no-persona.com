@@ -1,10 +1,16 @@
-import NextThemesProvider from "@/libs/next-themes/next-themes-provider";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
+import { Roboto_Mono } from "next/font/google";
+
+const robotoMono = Roboto_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: ""
+  title: "No persona",
+  description: "Tell me whatever you want.",
+  icons: {
+    icon: "/icons/square.svg"
+  }
 };
 
 export default function RootLayout({
@@ -13,9 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className="h-screen w-screen antialiased">
-        <NextThemesProvider>{children}</NextThemesProvider>
+    <html lang="en">
+      <body
+        className={`${robotoMono.className} h-dvh w-dvw bg-white text-black
+antialiased selection:bg-[#171717] selection:text-white`}
+      >
+        {children}
       </body>
     </html>
   );
