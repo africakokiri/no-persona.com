@@ -29,7 +29,7 @@ md:gap-8"
         placeholder="Type here..."
         onChange={(e) => setUserInput(e.target.value)}
         className={cn(
-          `${inter.className} h-full w-full resize-none rounded-none
+          `${inter.className} h-full w-full resize-none rounded-md
 border-[1px] border-black p-3 outline-none`
         )}
       />
@@ -42,7 +42,7 @@ md:gap-12"
           <span>{" / "}</span>
           <span>1000</span>
         </p>
-        <SubmitModalBtn />
+        <SubmitModalBtn userInput={userInput} />
       </div>
     </form>
   );
