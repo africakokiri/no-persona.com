@@ -41,9 +41,8 @@ export const SubmitModal = ({ userInput }: { userInput: string }) => {
           <AlertDialogDescription asChild>
             <div className="space-y-2">
               <p className="leading-7">
-                This action cannot be undone. This action cannot be undone.
-                This will permanently be posted unless you delete it
-                yourself.
+                This action cannot be undone. This will permanently be
+                posted unless you delete it yourself.
                 <br />
                 <span className="text-red-500 underline underline-offset-4">
                   To delete the comment, you need to enter the password.
