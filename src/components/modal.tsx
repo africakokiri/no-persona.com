@@ -1,3 +1,5 @@
+"use client";
+
 import { AlertUuid } from "@/components/alert-uuid";
 import {
   AlertDialog,
