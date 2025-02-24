@@ -12,6 +12,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { cn } from "@/libs/shadcn/utils";
+import { handleFormEvent } from "@/server/handle-form-event";
 
 import { useState } from "react";
 
@@ -39,7 +40,7 @@ export const SubmitModal = ({
     >
       <AlertDialogTrigger
         className={cn(
-          `rounded-md bg-black px-2 py-1 font-light text-white
+          `rounded-md bg-black px-2 py-1 font-[400] text-white
 transition-colors duration-300`,
           (userInput.length < 4 || password.length < 4) && "bg-red-500",
           userInput.length === 0 && password.length === 0 && "bg-black",
@@ -73,7 +74,11 @@ hover:text-white"
           >
             Cancel
           </AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogAction
+            onClick={() => handleFormEvent(userInput, password)}
+          >
+            Continue
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
