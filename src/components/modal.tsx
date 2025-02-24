@@ -14,7 +14,7 @@ import {
 
 import { useState } from "react";
 
-export const Modal = ({ userInput }: { userInput: string }) => {
+export const SubmitModal = ({ userInput }: { userInput: string }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleModal = (e: boolean) => {
