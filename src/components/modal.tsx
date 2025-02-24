@@ -69,13 +69,15 @@ transition-colors duration-300`,
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
-            className="bg-red-500 text-white hover:bg-red-400
+            className="bg-red-500 font-[400] text-white hover:bg-red-400
 hover:text-white"
           >
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={() => handleFormEvent(userInput, password)}
+            className="bg-green-500 font-[400] text-black
+hover:bg-green-400"
           >
             Continue
           </AlertDialogAction>
