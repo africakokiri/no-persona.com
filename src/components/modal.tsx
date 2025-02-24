@@ -52,7 +52,12 @@ export const SubmitModalBtn = ({ userInput }: { userInput: string }) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel
+            className="bg-red-500 text-white hover:bg-red-400
+hover:text-white"
+          >
+            Cancel
+          </AlertDialogCancel>
           <AlertDialogAction>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
