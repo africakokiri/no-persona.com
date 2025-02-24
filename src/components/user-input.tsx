@@ -3,7 +3,7 @@
 import { cn } from "@/libs/shadcn/utils";
 
 import { Inter } from "next/font/google";
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -11,10 +11,15 @@ const inter = Inter({ subsets: ["latin"] });
 export const UserInput = () => {
   const [userInput, setUserInput] = useState("");
 
+  const handleFormOnSubmit = (e: FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <form
-      action=""
-      className="flex w-[calc(100vw-64px)] flex-col gap-8 md:w-[702px]"
+      onSubmit={(e) => handleFormOnSubmit(e)}
+      className="flex w-[calc(100vw-64px)] flex-col gap-4 md:w-[702px]
+md:gap-8"
     >
       <TextareaAutosize
         autoFocus
@@ -27,7 +32,10 @@ export const UserInput = () => {
 border-[1px] border-black p-3 outline-none`
         )}
       />
-      <div className="flex items-center justify-end gap-12 font-light">
+      <div
+        className="flex items-center justify-end gap-8 font-light
+md:gap-12"
+      >
         <p>
           <span>{userInput.length}</span>
           <span>{" / "}</span>
