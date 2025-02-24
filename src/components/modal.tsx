@@ -37,7 +37,7 @@ export const SubmitModalBtn = ({ userInput }: { userInput: string }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogDescription asChild>
             <div className="space-y-2">
               <AlertUuid />
               <p className="leading-7">
