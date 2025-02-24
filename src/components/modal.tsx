@@ -14,14 +14,18 @@ import {
 import { cn } from "@/libs/shadcn/utils";
 import { handleFormEvent } from "@/server/handle-form-event";
 
-import { useState } from "react";
+import { type RefObject, useState } from "react";
 
 export const SubmitModal = ({
   userInput,
-  password
+  password,
+  userInputRef,
+  passwordRef
 }: {
   userInput: string;
   password: string;
+  userInputRef: RefObject<null>;
+  passwordRef: RefObject<null>;
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
@@ -31,6 +35,17 @@ export const SubmitModal = ({
     } else {
       setOpenModal(false);
     }
+  };
+
+  const handleContinueButton = () => {
+    if (!userInputRef.current || !passwordRef.current) {
+      throw new Error("ㅠㅠ");
+    }
+
+    (userInputRef.current as HTMLTextAreaElement).value = "";
+    (passwordRef.current as HTMLInputElement).value = "";
+
+    handleFormEvent(userInput, password);
   };
 
   return (
@@ -75,7 +90,7 @@ hover:text-white"
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => handleFormEvent(userInput, password)}
+            onClick={handleContinueButton}
             className="bg-green-500 font-[400] text-black
 hover:bg-green-400"
           >

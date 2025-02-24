@@ -67,6 +67,8 @@ border-black px-3 py-1 outline-none transition-colors duration-300`,
         <SubmitModal
           userInput={userInput}
           password={password}
+          userInputRef={textareaRef}
+          passwordRef={passwordRef}
         />
       </div>
     </form>
