@@ -1,3 +1,4 @@
+import { Comments } from "@/components/comments";
 import { PageTitle } from "@/components/page-title";
 import { UserInput } from "@/components/user-input";
 
@@ -9,6 +10,7 @@ gap-8"
     >
       <PageTitle />
       <UserInput />
+      <Comments />
     </div>
   );
 }

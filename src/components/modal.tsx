@@ -12,40 +12,39 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { cn } from "@/libs/shadcn/utils";
-import { handleFormEvent } from "@/server/handle-form-event";
+import { createComment } from "@/libs/supabase/comments";
 
-import { type RefObject, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 
 export const SubmitModal = ({
   userInput,
   password,
-  userInputRef,
-  passwordRef
+  setUserInput,
+  setPassword
 }: {
   userInput: string;
   password: string;
-  userInputRef: RefObject<null>;
-  passwordRef: RefObject<null>;
+  setUserInput: Dispatch<SetStateAction<string>>;
+  setPassword: Dispatch<SetStateAction<string>>;
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleModal = (e: boolean) => {
-    if (e && userInput.length > 4) {
+    if (e && userInput.length >= 4) {
       setOpenModal(true);
     } else {
       setOpenModal(false);
     }
   };
 
-  const handleContinueButton = () => {
-    if (!userInputRef.current || !passwordRef.current) {
-      throw new Error("ㅠㅠ");
-    }
+  const handleContinueButton = async () => {
+    setUserInput("");
+    setPassword("");
 
-    (userInputRef.current as HTMLTextAreaElement).value = "";
-    (passwordRef.current as HTMLInputElement).value = "";
+    const user_input = userInput;
 
-    handleFormEvent(userInput, password);
+    await createComment({ user_input, password });
+    // addInputData(userInput, password);
   };
 
   return (
@@ -57,11 +56,11 @@ export const SubmitModal = ({
         className={cn(
           `rounded-md bg-black px-2 py-1 font-[400] text-white
 transition-colors duration-300`,
-          (userInput.length < 4 || password.length < 4) && "bg-red-500",
+          (userInput.length < 4 || password.length < 4) && "bg-red-400",
           userInput.length === 0 && password.length === 0 && "bg-black",
           userInput.length >= 4 &&
             password.length >= 4 &&
-            "bg-green-500 text-black"
+            "bg-green-400 text-black"
         )}
       >
         Submit
@@ -75,7 +74,7 @@ transition-colors duration-300`,
                 This action cannot be undone. This will permanently be
                 posted unless you delete it yourself.
                 <br />
-                <span className="text-red-500 underline underline-offset-4">
+                <span className="text-red-400 underline underline-offset-4">
                   To delete the comment, you need to enter the password.
                 </span>
               </p>
@@ -84,7 +83,7 @@ transition-colors duration-300`,
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
-            className="bg-red-500 font-[400] text-white hover:bg-red-400
+            className="bg-red-400 font-[400] text-white hover:bg-red-300
 hover:text-white"
           >
             Cancel

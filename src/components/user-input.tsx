@@ -4,7 +4,7 @@ import { SubmitModal } from "@/components/modal";
 import { cn } from "@/libs/shadcn/utils";
 
 import { Inter } from "next/font/google";
-import { type FormEvent, useRef, useState } from "react";
+import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -12,22 +12,15 @@ const inter = Inter({ subsets: ["latin"] });
 export const UserInput = () => {
   const [userInput, setUserInput] = useState("");
   const [password, setPassword] = useState("");
-  const textareaRef = useRef(null);
-  const passwordRef = useRef(null);
-
-  const handleFormOnSubmit = (e: FormEvent) => {
-    e.preventDefault();
-  };
 
   return (
     <form
-      onSubmit={(e) => handleFormOnSubmit(e)}
+      onSubmit={(e) => e.preventDefault()}
       className="flex w-[calc(100vw-64px)] flex-col gap-4 md:w-[702px]
 md:gap-8"
     >
       <TextareaAutosize
         autoFocus
-        ref={textareaRef}
         spellCheck={false}
         maxLength={1000}
         value={userInput}
@@ -49,7 +42,6 @@ border-[1px] border-black p-3 outline-none transition-colors duration-300`,
           </p>
           <input
             type="password"
-            ref={passwordRef}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter the password."
@@ -67,8 +59,8 @@ border-black px-3 py-1 outline-none transition-colors duration-300`,
         <SubmitModal
           userInput={userInput}
           password={password}
-          userInputRef={textareaRef}
-          passwordRef={passwordRef}
+          setUserInput={setUserInput}
+          setPassword={setPassword}
         />
       </div>
     </form>
