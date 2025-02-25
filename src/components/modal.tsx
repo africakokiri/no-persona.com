@@ -12,7 +12,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { cn } from "@/libs/shadcn/utils";
-import { useUserInputDataStore } from "@/libs/zustand/store";
+import { createComment } from "@/libs/supabase/comments";
 
 import { type Dispatch, type SetStateAction, useState } from "react";
 
@@ -28,7 +28,6 @@ export const SubmitModal = ({
   setPassword: Dispatch<SetStateAction<string>>;
 }) => {
   const [openModal, setOpenModal] = useState(false);
-  const { addInputData } = useUserInputDataStore();
 
   const handleModal = (e: boolean) => {
     if (e && userInput.length >= 4) {
@@ -38,11 +37,14 @@ export const SubmitModal = ({
     }
   };
 
-  const handleContinueButton = () => {
+  const handleContinueButton = async () => {
     setUserInput("");
     setPassword("");
 
-    addInputData(userInput, password);
+    const user_input = userInput;
+
+    await createComment({ user_input, password });
+    // addInputData(userInput, password);
   };
 
   return (
