@@ -12,7 +12,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { cn } from "@/libs/shadcn/utils";
-import { handleFormEvent } from "@/server/handle-form-event";
+import { useUserInputDataStore } from "@/libs/zustand/store";
 
 import { type Dispatch, type SetStateAction, useState } from "react";
 
@@ -28,6 +28,7 @@ export const SubmitModal = ({
   setPassword: Dispatch<SetStateAction<string>>;
 }) => {
   const [openModal, setOpenModal] = useState(false);
+  const { addInputData } = useUserInputDataStore();
 
   const handleModal = (e: boolean) => {
     if (e && userInput.length >= 4) {
@@ -41,7 +42,16 @@ export const SubmitModal = ({
     setUserInput("");
     setPassword("");
 
-    handleFormEvent(userInput, password);
+    addInputData(
+      new Date().toLocaleDateString("en-US", {
+        timeZone: "UTC",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }),
+      userInput,
+      password
+    );
   };
 
   return (

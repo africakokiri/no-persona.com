@@ -2,11 +2,15 @@ import { create } from "zustand";
 
 interface UserInputData {
   inputData: {
-    date: Date;
+    date: string;
     userInput: string;
     password: string;
   }[];
-  addInputData: (date: Date, userInput: string, password: string) => void;
+  addInputData: (
+    date: string,
+    userInput: string,
+    password: string
+  ) => void;
 }
 
 export const useUserInputDataStore = create<UserInputData>((set) => ({
