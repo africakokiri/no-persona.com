@@ -42,16 +42,7 @@ export const SubmitModal = ({
     setUserInput("");
     setPassword("");
 
-    addInputData(
-      new Date().toLocaleDateString("en-US", {
-        timeZone: "UTC",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      }),
-      userInput,
-      password
-    );
+    addInputData(userInput, password);
   };
 
   return (

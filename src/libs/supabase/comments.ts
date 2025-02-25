@@ -5,7 +5,6 @@ import { createClient } from "@/libs/supabase/server";
 const supabase = await createClient();
 
 export const createComment = async (lastIndexInputDta: {
-  date: string;
   userInput: string;
   password: string;
 }) => {
