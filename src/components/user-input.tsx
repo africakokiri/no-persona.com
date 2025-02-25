@@ -33,7 +33,10 @@ border-[1px] border-black p-3 outline-none transition-colors duration-300`,
           userInput.length === 0 && "bg-white"
         )}
       />
-      <div className="flex flex-col items-end gap-4 font-light md:gap-8">
+      <div
+        className="flex flex-col items-end gap-4 font-light md:flex-row
+md:gap-8"
+      >
         <div className="flex w-full items-center justify-between">
           <p>
             <span>{userInput.length}</span>
