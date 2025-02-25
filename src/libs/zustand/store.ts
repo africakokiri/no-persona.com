@@ -2,21 +2,21 @@ import { create } from "zustand";
 
 interface UserInputData {
   inputData: {
-    userInput: string;
+    user_input: string;
     password: string;
   }[];
-  addInputData: (userInput: string, password: string) => void;
+  addInputData: (user_input: string, password: string) => void;
 }
 
 export const useUserInputDataStore = create<UserInputData>((set) => ({
   inputData: [],
 
-  addInputData: (userInput, password) =>
+  addInputData: (user_input, password) =>
     set((state) => ({
       inputData: [
         ...state.inputData,
         {
-          userInput,
+          user_input,
           password
         }
       ]
