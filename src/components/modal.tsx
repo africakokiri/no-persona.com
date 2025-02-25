@@ -14,18 +14,18 @@ import {
 import { cn } from "@/libs/shadcn/utils";
 import { handleFormEvent } from "@/server/handle-form-event";
 
-import { type RefObject, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 
 export const SubmitModal = ({
   userInput,
   password,
-  userInputRef,
-  passwordRef
+  setUserInput,
+  setPassword
 }: {
   userInput: string;
   password: string;
-  userInputRef: RefObject<null>;
-  passwordRef: RefObject<null>;
+  setUserInput: Dispatch<SetStateAction<string>>;
+  setPassword: Dispatch<SetStateAction<string>>;
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
@@ -38,12 +38,8 @@ export const SubmitModal = ({
   };
 
   const handleContinueButton = () => {
-    if (!userInputRef.current || !passwordRef.current) {
-      throw new Error("ㅠㅠ");
-    }
-
-    (userInputRef.current as HTMLTextAreaElement).value = "";
-    (passwordRef.current as HTMLInputElement).value = "";
+    setUserInput("");
+    setPassword("");
 
     handleFormEvent(userInput, password);
   };
@@ -55,8 +51,8 @@ export const SubmitModal = ({
     >
       <AlertDialogTrigger
         className={cn(
-          `rounded-md border-[1px] border-black bg-black px-2 py-1
-font-[400] text-white transition-colors duration-300`,
+          `rounded-md bg-black px-2 py-1 font-[400] text-white
+transition-colors duration-300`,
           (userInput.length < 4 || password.length < 4) && "bg-red-400",
           userInput.length === 0 && password.length === 0 && "bg-black",
           userInput.length >= 4 &&
