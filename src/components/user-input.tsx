@@ -4,7 +4,7 @@ import { SubmitModal } from "@/components/modal";
 import { cn } from "@/libs/shadcn/utils";
 
 import { Inter } from "next/font/google";
-import { type FormEvent, useState } from "react";
+import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -13,13 +13,9 @@ export const UserInput = () => {
   const [userInput, setUserInput] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleFormOnSubmit = (e: FormEvent) => {
-    e.preventDefault();
-  };
-
   return (
     <form
-      onSubmit={(e) => handleFormOnSubmit(e)}
+      onSubmit={(e) => e.preventDefault()}
       className="flex w-[calc(100vw-64px)] flex-col gap-4 md:w-[702px]
 md:gap-8"
     >
