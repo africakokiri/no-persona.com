@@ -1,3 +1,4 @@
+import { ReactQueryProvider } from "@/libs/react-query/ReactQueryProvider";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
@@ -19,13 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${robotoMono.className} h-dvh w-dvw bg-white text-black
-antialiased selection:bg-[#171717] selection:text-white`}
-      >
-        {children}
-      </body>
-    </html>
+    <ReactQueryProvider>
+      <html lang="en">
+        <body
+          className={`${robotoMono.className} h-dvh w-dvw bg-white
+text-black antialiased selection:bg-[#171717] selection:text-white`}
+        >
+          {children}
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }
