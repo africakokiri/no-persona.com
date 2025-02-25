@@ -10,7 +10,7 @@ gap-8"
     >
       <PageTitle />
       <UserInput />
-      <Comments />
+      {/* <Comments /> */}
     </div>
   );
 }

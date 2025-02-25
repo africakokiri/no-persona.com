@@ -11,7 +11,7 @@ export const createComment = async ({
 }) => {
   const supabase = await createClient();
 
-  const { data: newComment, error } = await supabase
+  const { data, error } = await supabase
     .from("comments")
     .insert({
       user_input,
@@ -21,7 +21,7 @@ export const createComment = async ({
 
   if (error) throw error;
 
-  return newComment;
+  return data;
 };
 
 export const getComments = async () => {
