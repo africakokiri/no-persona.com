@@ -1,8 +1,9 @@
-// import { getComments } from "@/libs/supabase/handle-comments";
-import { comments } from "@/mock/comments";
+import { getComments } from "@/libs/supabase/handle-comments";
+
+// import { comments } from "@/mock/comments";
 
 export const Comments = async () => {
-  // const comments = await getComments();
+  const comments = await getComments();
 
   if (!comments) {
     return null;

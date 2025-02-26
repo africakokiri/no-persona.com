@@ -12,9 +12,18 @@ export const UserInput = () => {
   const [comment, setComment] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = () => {
+    if (comment.length >= 4 && password.length >= 4) {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <form
       action={createComment}
+      onSubmit={handleSubmit}
       className="width-layout flex flex-col gap-4"
     >
       <TextareaAutosize
