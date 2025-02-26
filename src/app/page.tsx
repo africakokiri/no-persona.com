@@ -5,13 +5,13 @@ import { UserInput } from "@/components/user-input";
 export default function page() {
   return (
     <div
-      className="flex h-full w-full flex-col items-center justify-center"
+      className="relative flex h-full w-full flex-col items-center
+justify-center"
     >
-      <div className="space-y-8">
+      <div className="absolute space-y-8">
         <PageTitle />
         <UserInput />
       </div>
-      {/* <Comments /> */}
     </div>
   );
 }
