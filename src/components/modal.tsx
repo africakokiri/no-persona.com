@@ -41,9 +41,7 @@ export const SubmitModal = ({
     setComment("");
     setPassword("");
 
-    const user_input = comment;
-
-    await createComment({ user_input, password });
+    await createComment({ comment, password });
     // addInputData(userInput, password);
   };
 
