@@ -1,5 +1,7 @@
 "use client";
 
+import { createComment } from "@/libs/supabase/handle-comments";
+
 import { Inter } from "next/font/google";
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
@@ -12,10 +14,11 @@ export const UserInput = () => {
 
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
+      action={createComment}
       className="width-layout flex flex-col gap-4"
     >
       <TextareaAutosize
+        name="comment"
         autoFocus
         spellCheck={false}
         maxLength={1000}
@@ -35,6 +38,7 @@ duration-300`}
           </p>
           <input
             type="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter the password."
