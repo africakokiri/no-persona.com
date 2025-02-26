@@ -29,8 +29,8 @@ export const SubmitModal = ({
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
-  const handleModal = (e: boolean) => {
-    if (e && comment.length >= 4) {
+  const handleModal = () => {
+    if (comment.length >= 4 && password.length >= 4) {
       setOpenModal(true);
     } else {
       setOpenModal(false);
@@ -48,7 +48,7 @@ export const SubmitModal = ({
   return (
     <AlertDialog
       open={openModal}
-      onOpenChange={(e) => handleModal(e)}
+      onOpenChange={handleModal}
     >
       <AlertDialogTrigger
         className={cn(
