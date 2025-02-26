@@ -1,7 +1,5 @@
 "use client";
 
-import { cn } from "@/libs/shadcn/utils";
-
 import { Inter } from "next/font/google";
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
@@ -15,7 +13,7 @@ export const UserInput = () => {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="width-layout flex flex-col gap-4 md:gap-8"
+      className="width-layout flex flex-col gap-4"
     >
       <TextareaAutosize
         autoFocus
@@ -24,17 +22,11 @@ export const UserInput = () => {
         value={comment}
         placeholder="Type here..."
         onChange={(e) => setComment(e.target.value)}
-        className={cn(
-          `${inter.className} h-[50px] w-full resize-none rounded-md
-border-[1px] border-black p-3 outline-none transition-colors duration-300`,
-          comment.length < 4 && "bg-red-100",
-          comment.length === 0 && "bg-white"
-        )}
+        className={`${inter.className} h-[50px] w-full resize-none
+rounded-md border-[1px] border-black p-3 outline-none transition-colors
+duration-300`}
       />
-      <div
-        className="flex flex-col items-end gap-4 font-light md:flex-row
-md:gap-8"
-      >
+      <div className="flex flex-col items-end gap-4 font-light md:flex-row">
         <div className="flex w-full items-center justify-between">
           <p>
             <span>{comment.length}</span>
@@ -47,14 +39,9 @@ md:gap-8"
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter the password."
             maxLength={16}
-            className={cn(
-              `${inter.className} w-[200px] rounded-md border-[1px]
-border-black px-3 py-1 outline-none transition-colors duration-300`,
-              comment.length > 0 && "bg-red-100",
-              (password.length === 0 || password.length >= 4) &&
-                "bg-white",
-              comment.length > 0 && password.length === 0 && "bg-red-100"
-            )}
+            className={`${inter.className} w-[200px] rounded-md
+border-[1px] border-black px-3 py-1 outline-none transition-colors
+duration-300`}
           />
         </div>
         <button
