@@ -1,8 +1,7 @@
-import { createClient } from "@/libs/supabase/server";
+import { getComments } from "@/libs/supabase/handle-comments";
 
 export const Comments = async () => {
-  const supabase = await createClient();
-  const { data: comments } = await supabase.from("comments").select();
+  const comments = await getComments();
 
   if (!comments) {
     return null;
