@@ -29,7 +29,7 @@ export const SubmitModal = ({
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
-  const handleModal = () => {
+  const handleModalTrigger = () => {
     if (comment.length >= 4 && password.length >= 4) {
       setOpenModal(true);
     } else {
@@ -42,15 +42,15 @@ export const SubmitModal = ({
     setPassword("");
 
     await createComment({ comment, password });
-    // addInputData(userInput, password);
   };
 
   return (
     <AlertDialog
       open={openModal}
-      onOpenChange={handleModal}
+      onOpenChange={(e) => setOpenModal(e)}
     >
       <AlertDialogTrigger
+        onClick={handleModalTrigger}
         className={cn(
           `rounded-md bg-black px-2 py-1 font-[400] text-white
 transition-colors duration-300`,
