@@ -12,25 +12,25 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { cn } from "@/libs/shadcn/utils";
-import { createComment } from "@/libs/supabase/comments";
+import { createComment } from "@/libs/supabase/handle-comments";
 
 import { type Dispatch, type SetStateAction, useState } from "react";
 
 export const SubmitModal = ({
-  userInput,
+  comment,
   password,
-  setUserInput,
+  setComment,
   setPassword
 }: {
-  userInput: string;
+  comment: string;
   password: string;
-  setUserInput: Dispatch<SetStateAction<string>>;
+  setComment: Dispatch<SetStateAction<string>>;
   setPassword: Dispatch<SetStateAction<string>>;
 }) => {
   const [openModal, setOpenModal] = useState(false);
 
-  const handleModal = (e: boolean) => {
-    if (e && userInput.length >= 4) {
+  const handleModalTrigger = () => {
+    if (comment.length >= 4 && password.length >= 4) {
       setOpenModal(true);
     } else {
       setOpenModal(false);
@@ -38,27 +38,25 @@ export const SubmitModal = ({
   };
 
   const handleContinueButton = async () => {
-    setUserInput("");
+    setComment("");
     setPassword("");
 
-    const user_input = userInput;
-
-    await createComment({ user_input, password });
-    // addInputData(userInput, password);
+    await createComment({ comment, password });
   };
 
   return (
     <AlertDialog
       open={openModal}
-      onOpenChange={(e) => handleModal(e)}
+      onOpenChange={(e) => setOpenModal(e)}
     >
       <AlertDialogTrigger
+        onClick={handleModalTrigger}
         className={cn(
           `rounded-md bg-black px-2 py-1 font-[400] text-white
 transition-colors duration-300`,
-          (userInput.length < 4 || password.length < 4) && "bg-red-400",
-          userInput.length === 0 && password.length === 0 && "bg-black",
-          userInput.length >= 4 &&
+          (comment.length < 4 || password.length < 4) && "bg-red-400",
+          comment.length === 0 && password.length === 0 && "bg-black",
+          comment.length >= 4 &&
             password.length >= 4 &&
             "bg-green-400 text-black"
         )}

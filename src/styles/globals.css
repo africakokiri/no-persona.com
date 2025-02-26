@@ -57,14 +57,6 @@
     --chart-5: 340 75% 55%;
   }
 }
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 
 @layer base {
   * {
@@ -72,5 +64,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .width-layout {
+    @apply w-[calc(100dvw-64px)] md:w-[702px];
   }
 }

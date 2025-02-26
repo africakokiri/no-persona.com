@@ -10,33 +10,35 @@ import TextareaAutosize from "react-textarea-autosize";
 const inter = Inter({ subsets: ["latin"] });
 
 export const UserInput = () => {
-  const [userInput, setUserInput] = useState("");
+  const [comment, setComment] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="flex w-[calc(100vw-64px)] flex-col gap-4 md:w-[702px]
-md:gap-8"
+      className="width-layout flex flex-col gap-4 md:gap-8"
     >
       <TextareaAutosize
         autoFocus
         spellCheck={false}
         maxLength={1000}
-        value={userInput}
+        value={comment}
         placeholder="Type here..."
-        onChange={(e) => setUserInput(e.target.value)}
+        onChange={(e) => setComment(e.target.value)}
         className={cn(
           `${inter.className} h-[50px] w-full resize-none rounded-md
 border-[1px] border-black p-3 outline-none transition-colors duration-300`,
-          userInput.length < 4 && "bg-red-100",
-          userInput.length === 0 && "bg-white"
+          comment.length < 4 && "bg-red-100",
+          comment.length === 0 && "bg-white"
         )}
       />
-      <div className="flex flex-col items-end gap-4 font-light md:gap-8">
+      <div
+        className="flex flex-col items-end gap-4 font-light md:flex-row
+md:gap-8"
+      >
         <div className="flex w-full items-center justify-between">
           <p>
-            <span>{userInput.length}</span>
+            <span>{comment.length}</span>
             <span>{" / "}</span>
             <span>1000</span>
           </p>
@@ -49,17 +51,17 @@ border-[1px] border-black p-3 outline-none transition-colors duration-300`,
             className={cn(
               `${inter.className} w-[200px] rounded-md border-[1px]
 border-black px-3 py-1 outline-none transition-colors duration-300`,
-              userInput.length > 0 && "bg-red-100",
+              comment.length > 0 && "bg-red-100",
               (password.length === 0 || password.length >= 4) &&
                 "bg-white",
-              userInput.length > 0 && password.length === 0 && "bg-red-100"
+              comment.length > 0 && password.length === 0 && "bg-red-100"
             )}
           />
         </div>
         <SubmitModal
-          userInput={userInput}
+          comment={comment}
           password={password}
-          setUserInput={setUserInput}
+          setComment={setComment}
           setPassword={setPassword}
         />
       </div>
