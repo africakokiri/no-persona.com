@@ -21,8 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.className} h-dvh w-dvw bg-white text-black
-antialiased selection:bg-[#171717] selection:text-white`}
+        className={`${robotoMono.className} flex justify-center antialiased
+selection:bg-[#171717] selection:text-white`}
       >
         {children}
       </body>

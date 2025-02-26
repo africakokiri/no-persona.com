@@ -16,8 +16,7 @@ export const UserInput = () => {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="flex w-[calc(100vw-64px)] flex-col gap-4 md:w-[702px]
-md:gap-8"
+      className="width-layout flex flex-col gap-4 md:gap-8"
     >
       <TextareaAutosize
         autoFocus
