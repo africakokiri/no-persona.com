@@ -1,6 +1,5 @@
 "use client";
 
-import { SubmitModal } from "@/components/modal";
 import { cn } from "@/libs/shadcn/utils";
 
 import { Inter } from "next/font/google";
@@ -58,12 +57,12 @@ border-black px-3 py-1 outline-none transition-colors duration-300`,
             )}
           />
         </div>
-        <SubmitModal
-          comment={comment}
-          password={password}
-          setComment={setComment}
-          setPassword={setPassword}
-        />
+        <button
+          className="rounded-md bg-black px-2 py-1 font-[400] text-white
+transition-colors duration-300"
+        >
+          Submit
+        </button>
       </div>
     </form>
   );
