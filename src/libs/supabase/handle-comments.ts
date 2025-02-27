@@ -2,13 +2,7 @@
 
 import { createClient } from "@/libs/supabase/server";
 
-export const createComment = async ({
-  comment,
-  password
-}: {
-  comment: string;
-  password: string;
-}) => {
+export const createComment = async (comment: string, password: string) => {
   const supabase = await createClient();
 
   const { data, error } = await supabase

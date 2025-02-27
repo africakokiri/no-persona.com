@@ -1,10 +1,11 @@
 "use client";
 
-import { SubmitModal } from "@/components/modal";
 import { cn } from "@/libs/shadcn/utils";
+import { createComment } from "@/libs/supabase/handle-comments";
+import { useNewCommentStore } from "@/libs/zustand/store";
 
 import { Inter } from "next/font/google";
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -12,13 +13,35 @@ const inter = Inter({ subsets: ["latin"] });
 export const UserInput = () => {
   const [comment, setComment] = useState("");
   const [password, setPassword] = useState("");
+  const [initInput, setInitInput] = useState(false);
+  const { addNewComment } = useNewCommentStore();
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    setInitInput(true);
+
+    if (comment.length >= 4 && password.length >= 4) {
+      (async () => {
+        await createComment(comment, password);
+      })();
+
+      setInitInput(false);
+
+      setComment("");
+      setPassword("");
+
+      addNewComment(comment, password);
+    }
+  };
 
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
-      className="width-layout flex flex-col gap-4 md:gap-8"
+      onSubmit={(e) => handleSubmit(e)}
+      className="width-layout flex flex-col gap-4"
     >
       <TextareaAutosize
+        name="comment"
         autoFocus
         spellCheck={false}
         maxLength={1000}
@@ -28,14 +51,11 @@ export const UserInput = () => {
         className={cn(
           `${inter.className} h-[50px] w-full resize-none rounded-md
 border-[1px] border-black p-3 outline-none transition-colors duration-300`,
-          comment.length < 4 && "bg-red-100",
-          comment.length === 0 && "bg-white"
+          initInput && comment.length < 4 && "bg-red-200",
+          initInput && comment.length >= 4 && "bg-white"
         )}
       />
-      <div
-        className="flex flex-col items-end gap-4 font-light md:flex-row
-md:gap-8"
-      >
+      <div className="flex flex-col items-end gap-4 font-light md:flex-row">
         <div className="flex w-full items-center justify-between">
           <p>
             <span>{comment.length}</span>
@@ -44,6 +64,7 @@ md:gap-8"
           </p>
           <input
             type="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter the password."
@@ -51,19 +72,17 @@ md:gap-8"
             className={cn(
               `${inter.className} w-[200px] rounded-md border-[1px]
 border-black px-3 py-1 outline-none transition-colors duration-300`,
-              comment.length > 0 && "bg-red-100",
-              (password.length === 0 || password.length >= 4) &&
-                "bg-white",
-              comment.length > 0 && password.length === 0 && "bg-red-100"
+              initInput && password.length < 4 && "bg-red-200",
+              initInput && password.length >= 4 && "bg-white"
             )}
           />
         </div>
-        <SubmitModal
-          comment={comment}
-          password={password}
-          setComment={setComment}
-          setPassword={setPassword}
-        />
+        <button
+          className="rounded-md bg-black px-2 py-1 font-[400] text-white
+transition-colors duration-300"
+        >
+          Submit
+        </button>
       </div>
     </form>
   );

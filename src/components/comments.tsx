@@ -1,57 +1,35 @@
-// import { getComments } from "@/libs/supabase/handle-comments";
+"use client";
 
-const comments = [
-  {
-    id: 13,
-    comment: "1234",
-    password: "1234",
-    created_at: "2025-02-25T04:04:08.143245+00:00"
-  },
-  {
-    id: 22,
-    comment: "1234",
-    password: "1234",
-    created_at: "2025-02-25T23:07:31.330323+00:00"
-  },
-  {
-    id: 23,
-    comment: "test",
-    password: "test",
-    created_at: "2025-02-25T23:08:21.723272+00:00"
-  },
-  {
-    id: 29,
-    comment: "Test comment",
-    password: "1234",
-    created_at: "2025-02-25T23:19:51.084659+00:00"
-  },
-  {
-    id: 40,
-    comment: "3113",
-    password: "3113",
-    created_at: "2025-02-25T23:51:48.027767+00:00"
-  },
-  {
-    id: 41,
-    comment: "zxcv",
-    password: "zxcv",
-    created_at: "2025-02-25T23:52:30.871974+00:00"
-  },
-  {
-    id: 50,
-    comment:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi commodi doloribus eligendi non accusantium minima ipsa sit. Dolor saepe sunt, quibusdam ducimus voluptate suscipit commodi cum praesentium beatae molestias aliquid.",
-    password: "1234",
-    created_at: "2025-02-27T23:52:30.871974+00:00"
-  }
-];
+import { getComments } from "@/libs/supabase/handle-comments";
+import { useNewCommentStore } from "@/libs/zustand/store";
 
-export const Comments = async () => {
-  // const comments = await getComments();
+import { useEffect, useState } from "react";
 
-  if (!comments) {
-    return null;
-  }
+interface Comments {
+  comment: string;
+  password: string;
+  created_at: string;
+}
+
+export const Comments = () => {
+  const [comments, setComments] = useState<Comments[]>([]);
+  const { newComments } = useNewCommentStore();
+
+  useEffect(() => {
+    (async () => {
+      const res = await getComments();
+
+      // optimistic UI 적용: 먼저 UI에 newComments를 추가
+      const mergedComments = [...newComments, ...res];
+
+      // 중복 댓글을 제거 (ID 기준으로 중복을 제거)
+      const uniqueComments = Array.from(
+        new Map(mergedComments.map((c) => [c.created_at, c])).values()
+      );
+
+      setComments(uniqueComments);
+    })();
+  }, [newComments]);
 
   return (
     <ul className="space-y-8">
@@ -62,7 +40,7 @@ export const Comments = async () => {
 
           return 0;
         })
-        .map(({ id, comment, created_at }) => {
+        .map(({ comment, created_at }) => {
           const date = new Date(created_at);
 
           const formattedTime = date.toLocaleString(undefined, {
@@ -76,7 +54,7 @@ export const Comments = async () => {
 
           return (
             <li
-              key={id}
+              key={created_at}
               className="w-full space-y-2 rounded-md border-[1px]
 border-black bg-white p-4"
             >
