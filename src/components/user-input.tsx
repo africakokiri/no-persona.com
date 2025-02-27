@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/libs/shadcn/utils";
+import { createComment } from "@/libs/supabase/handle-comments";
 import { useNewCommentStore } from "@/libs/zustand/store";
 
 import { Inter } from "next/font/google";
@@ -21,6 +22,10 @@ export const UserInput = () => {
     setInitInput(true);
 
     if (comment.length >= 4 && password.length >= 4) {
+      (async () => {
+        await createComment(comment, password);
+      })();
+
       setInitInput(false);
 
       setComment("");

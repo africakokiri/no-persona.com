@@ -1,24 +1,24 @@
 import { create } from "zustand";
 
 interface NewCommentStore {
-  comments: {
-    id?: number;
-    comment: string;
-    password: string;
-    create_at?: string;
+  newComments: {
+    comment?: string;
+    password?: string;
+    created_at?: string;
   }[];
   addNewComment: (comment: string, password: string) => void;
 }
 
 export const useNewCommentStore = create<NewCommentStore>((set) => ({
-  comments: [],
+  newComments: [],
   addNewComment: (comment, password) =>
     set((state) => ({
-      comments: [
-        ...state.comments,
+      newComments: [
+        ...state.newComments,
         {
           comment,
-          password
+          password,
+          created_at: new Date().toISOString()
         }
       ]
     }))

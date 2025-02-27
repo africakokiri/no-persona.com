@@ -2,18 +2,20 @@
 
 import { createClient } from "@/libs/supabase/server";
 
-export const createComment = async (formData: FormData) => {
+export const createComment = async (comment: string, password: string) => {
   const supabase = await createClient();
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("comments")
     .insert({
-      comment: formData.get("comment"),
-      password: formData.get("password")
+      comment,
+      password
     })
     .select();
 
   if (error) throw error;
+
+  return data;
 };
 
 export const getComments = async () => {
