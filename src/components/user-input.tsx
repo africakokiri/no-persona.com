@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/libs/shadcn/utils";
-import { createComment } from "@/libs/supabase/handle-comments";
+import { useNewCommentStore } from "@/libs/zustand/store";
 
 import { Inter } from "next/font/google";
 import { type FormEvent, useState } from "react";
@@ -13,21 +13,25 @@ export const UserInput = () => {
   const [comment, setComment] = useState("");
   const [password, setPassword] = useState("");
   const [initInput, setInitInput] = useState(false);
+  const { addNewComment } = useNewCommentStore();
 
   const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
     setInitInput(true);
 
-    if (comment.length < 4 || password.length < 4) {
-      e.preventDefault();
-    }
+    if (comment.length >= 4 && password.length >= 4) {
+      setInitInput(false);
 
-    setComment("");
-    setPassword("");
+      setComment("");
+      setPassword("");
+
+      addNewComment(comment, password);
+    }
   };
 
   return (
     <form
-      action={createComment}
       onSubmit={(e) => handleSubmit(e)}
       className="width-layout flex flex-col gap-4"
     >
