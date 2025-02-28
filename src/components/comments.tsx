@@ -48,7 +48,12 @@ export const Comments = () => {
     if (data.length !== 0) {
       console.log(comments);
 
-      setComments(comments.slice(1, comments.length - 1));
+      const targetComment = comments.find(
+        (dbComment) =>
+          dbComment.comment === comment && dbComment.password === password
+      );
+
+      setComments(comments.filter((item) => item !== targetComment));
     }
   };
 
