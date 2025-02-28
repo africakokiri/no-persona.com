@@ -35,7 +35,10 @@ export const Comments = () => {
       const res = await getComments();
 
       if (newComments.length > 0) {
-        setComments([...res.slice(0, res.length - 1), ...newComments]);
+        setComments([
+          ...res.slice(0, res.length - newComments.length),
+          ...newComments
+        ]);
       } else {
         setComments([...res, ...newComments]);
       }
@@ -46,8 +49,6 @@ export const Comments = () => {
     const data = await deleteComment(comment, password);
 
     if (data.length !== 0) {
-      console.log(comments);
-
       const targetComment = comments.find(
         (dbComment) =>
           dbComment.comment === comment && dbComment.password === password
