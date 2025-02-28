@@ -21,7 +21,10 @@ export const createComment = async (comment: string, password: string) => {
 export const getComments = async () => {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.from("comments").select();
+  const { data, error } = await supabase
+    .from("comments")
+    .select("*")
+    .order("created_at", { ascending: false });
 
   if (error) throw error;
 
