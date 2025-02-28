@@ -19,15 +19,11 @@ export const Comments = () => {
     (async () => {
       const res = await getComments();
 
-      // optimistic UI 적용: 먼저 UI에 newComments를 추가
-      const mergedComments = [...newComments, ...res];
-
-      // 중복 댓글을 제거 (ID 기준으로 중복을 제거)
-      const uniqueComments = Array.from(
-        new Map(mergedComments.map((c) => [c.created_at, c])).values()
-      );
-
-      setComments(uniqueComments);
+      if (newComments.length > 0) {
+        setComments([...res.slice(0, res.length - 1), ...newComments]);
+      } else {
+        setComments([...res, ...newComments]);
+      }
     })();
   }, [newComments]);
 
