@@ -50,7 +50,7 @@ export const UserInput = () => {
         onChange={(e) => setComment(e.target.value)}
         className={cn(
           `${inter.className} h-[50px] w-full resize-none rounded-md
-border-[1px] border-black p-3 outline-none transition-colors duration-300`,
+border-[1px] border-black p-3 transition-colors duration-300`,
           initInput && comment.length < 4 && "bg-red-200",
           initInput && comment.length >= 4 && "bg-white"
         )}
@@ -71,7 +71,7 @@ border-[1px] border-black p-3 outline-none transition-colors duration-300`,
             maxLength={16}
             className={cn(
               `${inter.className} w-[200px] rounded-md border-[1px]
-border-black px-3 py-1 outline-none transition-colors duration-300`,
+border-black px-3 py-1 transition-colors duration-300`,
               initInput && password.length < 4 && "bg-red-200",
               initInput && password.length >= 4 && "bg-white"
             )}

@@ -11,7 +11,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
-import { getComments } from "@/libs/supabase/handle-comments";
+import {
+  deleteComment,
+  getComments
+} from "@/libs/supabase/handle-comments";
 import { useNewCommentStore } from "@/libs/zustand/store";
 
 import { useEffect, useState } from "react";
@@ -24,6 +27,7 @@ interface Comments {
 
 export const Comments = () => {
   const [comments, setComments] = useState<Comments[]>([]);
+  const [password, setPassword] = useState("");
   const { newComments } = useNewCommentStore();
 
   useEffect(() => {
@@ -37,6 +41,16 @@ export const Comments = () => {
       }
     })();
   }, [newComments]);
+
+  const handleContinueButton = async (comment: string) => {
+    const data = await deleteComment(comment, password);
+
+    if (data.length !== 0) {
+      console.log(comments);
+
+      setComments(comments.slice(1, comments.length - 1));
+    }
+  };
 
   return (
     <>
@@ -68,7 +82,7 @@ border-black bg-white p-4"
               >
                 <p>{comment}</p>
                 <p className="flex justify-between text-right text-sm">
-                  <AlertDialog>
+                  <AlertDialog onOpenChange={() => setPassword("")}>
                     <AlertDialogTrigger className="text-red-500">
                       Delete
                     </AlertDialogTrigger>
@@ -81,6 +95,8 @@ border-black bg-white p-4"
                           <input
                             type="password"
                             placeholder="Enter the password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             maxLength={16}
                             className="w-full rounded-md border-[1px]
 border-black px-3 py-2 text-black"
@@ -89,7 +105,11 @@ border-black px-3 py-2 text-black"
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction>Continue</AlertDialogAction>
+                        <AlertDialogAction
+                          onClick={() => handleContinueButton(comment)}
+                        >
+                          Continue
+                        </AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
