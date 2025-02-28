@@ -8,7 +8,7 @@ export default function page() {
       className="width-layout relative my-16 flex min-h-fit flex-col
 items-center space-y-16 md:my-32"
     >
-      <div className="space-y-4">
+      <div className="space-y-8">
         <PageTitle />
         <UserInput />
       </div>
