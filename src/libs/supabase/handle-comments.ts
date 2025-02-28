@@ -21,7 +21,25 @@ export const createComment = async (comment: string, password: string) => {
 export const getComments = async () => {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.from("comments").select();
+  const { data, error } = await supabase
+    .from("comments")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const deleteComment = async (comment: string, password: string) => {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("comments")
+    .delete()
+    .eq("comment", comment)
+    .eq("password", password)
+    .select();
 
   if (error) throw error;
 
